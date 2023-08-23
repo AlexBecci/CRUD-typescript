@@ -1,4 +1,4 @@
-import React, { Fragment, useState,useRef } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 
 type FormElement = React.FormEvent<HTMLFormElement>;
 
@@ -12,7 +12,7 @@ function App(): JSX.Element {
   const [newTask, setNewTask] = useState<string>('');
   const [tasks, setTasks] = useState<ITask[]>([])
 
-  const taskInput= useRef<HTMLInputElement>(null);
+  const taskInput = useRef<HTMLInputElement>(null);
   const handleSubmit = (e: FormElement) => {
 
     e.preventDefault();
@@ -41,27 +41,29 @@ function App(): JSX.Element {
   }
   return (
     <Fragment>
+      <div className='items-center'>
 
-      <form onSubmit={handleSubmit} className='bg-black p-8 mx-auto justify-center text-center'>
+        <form onSubmit={handleSubmit} className='bg-black p-8 mx-auto justify-center text-center'>
 
-        <input ref={taskInput} type="text" onChange={e => setNewTask(e.target.value)} value={newTask} />
-        <button className='text-white mx-4 bg-slate-800 px-4'>Save</button>
-      </form>
+          <input ref={taskInput} type="text" onChange={e => setNewTask(e.target.value)} value={newTask} />
+          <button className='text-white mx-4 bg-slate-800 px-4'>Save</button>
+        </form>
 
-      {
-        tasks.map((t: ITask, i: number) => {
-          return (
-            <div className='px-8 m-4 bg-amber-200 text-center' key={i}>
+        {
+          tasks.map((t: ITask, i: number) => {
+            return (
+              <div className='px-8 m-4 bg-amber-200 text-center' key={i}>
 
-              <h1 style={{ textDecoration: t.done ? 'line-through' : '' }}> {t.name}</h1>
-              <div>
-                <button onClick={() => toggleDoneTask(i)}>{t.done ? '✓' : 'Χ'}</button>
-                <button onClick={() => removeTask(i)} className='bg-red-500'>Eliminar</button>
+                <h1 style={{ textDecoration: t.done ? 'line-through' : '' }}> {t.name}</h1>
+                <div>
+                  <button onClick={() => toggleDoneTask(i)}>{t.done ? '✓' : 'Χ'}</button>
+                  <button onClick={() => removeTask(i)} className='bg-red-500'>Eliminar</button>
+                </div>
               </div>
-            </div>
-          )
-        })
-      }
+            )
+          })
+        }
+      </div>
     </Fragment>
   );
 }
